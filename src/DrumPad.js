@@ -10,13 +10,6 @@ const Flex = styled(BaseFlex)`
 `;
 
 export class DrumPad extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.audio = new Audio();
-  }
-  _onClick() {
-    this.props.handleClick(this.props.value);
-  }
   render() {
     return (
       <Flex

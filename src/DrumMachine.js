@@ -1,12 +1,18 @@
 import React from "react";
-import { Box as Base, Flex as BaseFlex, Text } from "rebass";
 import ReactFCCtest from "react-fcctest";
-import { minHeight, minWidth } from "styled-system";
+import Toggle from "react-toggle";
+import { Box as Base, Flex as BaseFlex, Text } from "rebass";
 import styled from "styled-components";
+import { minHeight, minWidth, space } from "styled-system";
 
+import { DrumPad } from "./DrumPad";
+
+// sound bank info, used to build the view and
+// give information to the audio components
 import { bankOne } from "./bankOne";
 import { bankTwo } from "./bankTwo";
-import { DrumPad } from "./DrumPad";
+
+import "./react_toggle.css";
 
 const Box = styled(Base)`
   ${minHeight}
@@ -16,12 +22,12 @@ const Flex = styled(BaseFlex)`
   ${minHeight}
 `;
 
+const textColor = "#282c34";
+
 class DrumMachine extends React.Component {
   constructor(props) {
     super(props);
-    // this.audioRefQ = React.createRef();
     this.handleClick = this.handleClick.bind(this);
-    // this.audio = new Audio();
   }
   state = {
     power: "is_on", // is_off : String
@@ -48,6 +54,8 @@ class DrumMachine extends React.Component {
   };
 
   handleClick = event => {
+    if (this.state.power === "is_off") return console.log("POWER IS OFF");
+
     let privateEventValue = event;
     console.log("privateEventValue inside handleClick");
     console.log(privateEventValue);
@@ -81,7 +89,7 @@ class DrumMachine extends React.Component {
     this.setState(
       (prevState, props) => ({
         keyPressed: privateEventValue.toUpperCase(),
-        currentSong: songToPlay,
+        currentSong: songToPlay[0],
         playStatus: "PLAYING",
         soundLabel: soundLabel[0]
       }),
@@ -92,7 +100,20 @@ class DrumMachine extends React.Component {
     );
   };
 
+  handlePowerToggle = () => {
+    this.setState((prevState, props) => ({
+      power: prevState.power === "is_on" ? "is_off" : "is_on"
+    }));
+  };
+
+  handleBankToggle = () => {
+    this.setState((prevState, props) => ({
+      bank: prevState.bank === "bankOne" ? "bankTwo" : "bankOne"
+    }));
+  };
+
   handleKeyPress = event => {
+    if (this.state.power === "is_off") return console.log("POWER IS OFF");
     event.preventDefault();
     console.log(event.key.toUpperCase());
 
@@ -109,10 +130,10 @@ class DrumMachine extends React.Component {
     let songToPlay =
       this.state.bank === "bankOne"
         ? bankOne
-            .filter(soundInfo => soundInfo.key === event.key.toUpperCase())
+            .filter(bankOneItem => bankOneItem.key === event.key.toUpperCase())
             .map(x => x.url)
         : bankTwo
-            .filter(soundInfo => soundInfo.key === event.key.toUpperCase())
+            .filter(bankTwoItem => bankTwoItem.key === event.key.toUpperCase())
             .map(x => x.url);
 
     let soundLabel =
@@ -127,7 +148,7 @@ class DrumMachine extends React.Component {
     this.setState(
       (prevState, props) => ({
         keyPressed: event.key,
-        currentSong: songToPlay,
+        currentSong: songToPlay[0],
         playStatus: "PLAYING",
         soundLabel: soundLabel[0]
       }),
@@ -167,9 +188,41 @@ class DrumMachine extends React.Component {
         <ReactFCCtest />
         <Header title={title} />
         <Box id="display">
-          {this.state.display}
-          <Text>{this.state.bank}</Text>
-          <Text>{this.state.keyPressed.toUpperCase()}</Text>
+          {/* power toggle */}
+          <label>
+            <Toggle
+              defaultChecked={this.state.power === "is_on"}
+              onChange={this.handlePowerToggle}
+            />
+            <Flex flexDirection="row">
+              <Text color={this.state.power === "is_on" ? "green" : "#eee"}>
+                On
+              </Text>{" "}
+              /{" "}
+              <Text color={this.state.power === "is_off" ? "crimson" : "#eee"}>
+                Off
+              </Text>
+            </Flex>
+          </label>
+          {/* sound bank toggle */}
+          <label>
+            <Toggle
+              defaultChecked={this.state.bank === "bankOne"}
+              onChange={this.handleBankToggle}
+            />
+            <Flex flexDirection="row">
+              <Text color={this.state.bank === "bankOne" ? "green" : textColor}>
+                Bank One - Heater 1 Kit
+              </Text>{" "}
+              /{" "}
+              <Text
+                color={this.state.bank === "bankTwo" ? "crimson" : textColor}
+              >
+                Bank Two - Piano Kit
+              </Text>
+            </Flex>
+          </label>
+          {/* {this.state.display} */}
           <Text>{this.state.soundLabel}</Text>
         </Box>
 
@@ -190,7 +243,7 @@ class DrumMachine extends React.Component {
               <audio
                 id={soundItem.key}
                 className="clip"
-                src={soundItem.url}
+                src={this.state.currentSong}
                 ref={audio => {
                   this["audioRef" + soundItem.key] = audio;
                 }}
