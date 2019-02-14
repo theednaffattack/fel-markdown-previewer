@@ -11,56 +11,56 @@ import RP4_KICK_1 from "./audio/bankOne/RP4_KICK_1.mp3";
 export const bankOne = [
   {
     keyCode: 81,
-    keyValue: "Q",
-    name: "Heater-1",
-    url: "Heater-1.mp3"
+    key: "Q",
+    name: "Heater_1",
+    url: Heater_1
   },
   {
     keyCode: 87,
-    keyValue: "W",
-    name: "Heater-2",
-    url: "Heater-2.mp3"
+    key: "W",
+    name: "Heater_2",
+    url: Heater_2
   },
   {
     keyCode: 69,
-    keyValue: "E",
-    name: "Heater-3",
-    url: "Heater-3.mp3"
+    key: "E",
+    name: "Heater_3",
+    url: Heater_3
   },
   {
     keyCode: 65,
-    keyValue: "A",
-    name: "Heater-4",
-    url: "Heater-4_1.mp3"
+    key: "A",
+    name: "Heater_4",
+    url: Heater_4
   },
   {
     keyCode: 83,
-    keyValue: "S",
+    key: "S",
     name: "Clap",
-    url: "Heater-6.mp3"
+    url: Heater_6
   },
   {
     keyCode: 68,
-    keyValue: "D",
-    name: "Open-HH",
-    url: "Dsc_Oh.mp3"
+    key: "D",
+    name: "Open_HH",
+    url: Dsc_Oh
   },
   {
     keyCode: 90,
-    keyValue: "Z",
-    name: "Kick-n'-Hat",
-    url: "Kick_n_Hat.mp3"
+    key: "Z",
+    name: "Kick_n'_Hat",
+    url: Kick_n_Hat
   },
   {
     keyCode: 88,
-    keyValue: "X",
+    key: "X",
     name: "Kick",
-    url: "RP4_KICK_1.mp3"
+    url: RP4_KICK_1
   },
   {
     keyCode: 67,
-    keyValue: "C",
-    name: "Closed-HH",
-    url: "Cev_H2.mp3"
+    key: "C",
+    name: "Closed_HH",
+    url: Cev_H2
   }
 ];
