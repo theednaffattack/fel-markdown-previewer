@@ -10,6 +10,7 @@
     "marked": "^0.6.0",
     "path": "^0.12.7",
     "react": "^16.8.1",
+    "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.8.1",
     "react-fcctest": "^1.3.0",
     "react-geomicons": "^3.0.0-0",

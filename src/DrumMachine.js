@@ -173,10 +173,15 @@ class DrumMachine extends React.Component {
   }
 
   componentWillUnmount() {
+    let self = this;
     document.removeEventListener("keydown", this.handleKeyPress);
 
     bankOne.forEach(soundItem =>
-      this["audioRef" + soundItem.key].removeEventListener("ended")
+      this["audioRef" + soundItem.key].removeEventListener("ended", function() {
+        self.setState({
+          playStatus: "PAUSED"
+        });
+      })
     );
   }
 
