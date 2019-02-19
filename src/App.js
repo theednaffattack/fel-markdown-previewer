@@ -9,7 +9,10 @@ import Home from "./Home";
 import MyMarkdown from "./MyMarkdown";
 import DrumMachine from "./DrumMachine";
 import NewTimerV2 from "./Timer/NewTimer_v2";
-// import MyComponent from "./MyComponent";
+// import BarChart from "./BarChart/App";
+import Heatmap from "./Heatmap/App";
+import { Treemap1 } from "./Treemap/AppV1";
+import Treemap from "./Treemap/App";
 
 const Link = styled(BaseLink)`
   ${space}
@@ -32,6 +35,18 @@ const App = () => (
       <Link width={1 / 3} mr={2} to="pomodoro">
         Pupper Pomodoro
       </Link>
+      {/* <Link width={1 / 3} mr={2} to="barchart">
+        Bar Chart
+      </Link> */}
+      <Link width={1 / 3} mr={2} to="heatmap">
+        Heatmap
+      </Link>
+      <Link width={1 / 3} mr={2} to="treemap1">
+        Treemap
+      </Link>
+      <Link width={1 / 3} mr={2} to="treemap3">
+        Treemap_v3
+      </Link>
     </nav>
     <Router>
       <Home path="/" />
@@ -40,6 +55,10 @@ const App = () => (
       {/* <Pomodoro path="/pomodoro_old" />
       <PomodoroNew path="/pomodoro_oldtoo" /> */}
       <NewTimerV2 path="/pomodoro" />
+      {/* <BarChart path="/barchart" /> */}
+      <Heatmap path="/heatmap" />
+      <Treemap1 path="/treemap1" />
+      <Treemap path="/treemap" />
     </Router>
   </Flex>
 );
